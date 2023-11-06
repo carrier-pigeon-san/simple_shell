@@ -76,14 +76,14 @@ char **strtoarr(char *str, char *delim)
     int i = 0;
     char *temp;
     int nwords = strchrcount(str, delim) + 1;
-    printf("nwords: %d\n", nwords);
-    
+    char *dup = strdup(str);
     char **strarr = malloc(sizeof(char *) * nwords);
+
     if (strarr == NULL) {
-        return NULL; // Handle memory allocation failure
+        return NULL;
     }
 
-    temp = strtok(str, delim);
+    temp = strtok(dup, delim);
 
     while (temp != NULL)
     {
@@ -105,15 +105,15 @@ int main(void)
 {
 	int i = 0;
 	char *delim = ",";
-	char *str = ",hello,,hi,bye,h";
+	char *str = ",hello,,hi,bye,he";
 	char **strarr = strtoarr(str, delim);
-	int nwords = strchrcount(str, delim);
-	printf("commas found: %d\n", nwords);
+	int nwords = strchrcount(str, delim) + 1;
 	printf("words found: \n");
 
 	while (i < nwords)
 	{
 		printf("%s \n", *(strarr + i));
+		i++;
 	}
 
 	free(strarr);
