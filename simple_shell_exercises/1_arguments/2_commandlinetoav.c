@@ -20,7 +20,7 @@ char *_strchr(int *index_ptr, char *s, char *c)
 {
 	char *location = NULL;
 	int i = *index_ptr;
-	
+
 	while (*(s + i) != '\0')
 	{
 		if (*(s + i) == *c)
@@ -69,32 +69,34 @@ int strchrcount(char *str, char *c)
  * @str: string to be split
  * @delim: delimiter to be used
  * Return: an array of each word of the string str
+ * Description: nwords = ... + 2. Doing this because:
+ * 1 - for every n delimiters there are n + 1 words
+ * 2 - need to add a null terminator so as to know when to end
+ * the array
  */
 
 char **strtoarr(char *str, char *delim)
 {
-    int i = 0;
-    char *temp;
-    int nwords = strchrcount(str, delim) + 1;
-    char *dup = strdup(str);
-    char **strarr = malloc(sizeof(char *) * nwords);
+	int i = 0;
+	char *temp;
+	int nwords = strchrcount(str, delim) + 2;
+	char *dup = strdup(str);
+	char **strarr = malloc(sizeof(char *) * nwords);
 
-    if (strarr == NULL) {
-        return NULL;
-    }
-
-    temp = strtok(dup, delim);
-
-    while (temp != NULL)
-    {
-        *(strarr + i) = strdup(temp); // Allocate and copy the string
-        temp = strtok(NULL, delim);
-        i++;
-    }
-
-    return strarr;
+	if (strarr == NULL)
+	{
+		return (NULL);
+	}
+	temp = strtok(dup, delim);
+	while (temp != NULL)
+	{
+		*(strarr + i) = strdup(temp);
+		temp = strtok(NULL, delim);
+		i++;
+	}
+	*(strarr + i) = NULL;
+	return (strarr);
 }
-	
 
 /**
  * main - entry point
@@ -107,12 +109,20 @@ int main(void)
 	char *delim = ",";
 	char *str = ",hello,,hi,bye,he";
 	char **strarr = strtoarr(str, delim);
-	int nwords = strchrcount(str, delim) + 1;
-	printf("words found: \n");
 
-	while (i < nwords)
+	printf("words found: \n");
+	while (1)
 	{
-		printf("%s \n", *(strarr + i));
+		if (*(strarr + i) != NULL)
+		{
+			printf("%s \n", *(strarr + i));
+		}
+
+		else if (*(strarr + i) == NULL)
+		{
+			printf("found NULL\n");
+			break;
+		}
 		i++;
 	}
 
