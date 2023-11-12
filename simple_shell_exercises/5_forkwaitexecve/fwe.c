@@ -85,7 +85,7 @@ int main(int argc, char *argv[], char *envp[])
 		}
 		i++;
 	}
+	free(exec_argv);
 	printf("%u: Parent exit\n", getpid());
-
 	return (0);
 }
