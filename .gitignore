@@ -1,2 +1,5 @@
 # Files to ignore
 hsh
+a
+main.c
+output
