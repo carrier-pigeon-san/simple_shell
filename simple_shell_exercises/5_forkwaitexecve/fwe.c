@@ -41,6 +41,9 @@ char **strarrdup(int arrc, char *arrv[], int offset)
  * in 5 different child processes. Each child should be
  * created by the same process (the father).
  * Wait for a child to exit before creating a new child.
+ * @argc: length of command line arguments
+ * @argv: array of command line arguments
+ * @envp: environment arguments
  * Return: 0
  */
 
@@ -65,12 +68,8 @@ int main(int argc, char *argv[], char *envp[])
 
 	while (i < child_count)
 	{
-
 		if (childpid == -1)
-		{
 			return (-1);
-		}
-
 		else if (childpid == 0)
 		{
 			if (execve(exec_argv[0], exec_argv, envp) == -1)
@@ -81,15 +80,12 @@ int main(int argc, char *argv[], char *envp[])
 		{
 			if (i > -1)
 				wait(&status);
-
 			if (i < child_count - 1)
 				childpid = fork();
 		}
 		i++;
 	}
-
 	printf("%u: Parent exit\n", getpid());
 
 	return (0);
 }
-
