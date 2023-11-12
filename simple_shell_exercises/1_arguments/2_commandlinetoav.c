@@ -20,7 +20,7 @@
 char *_strchr(int *index_ptr, char *s, char *c)
 {
 	char *location = NULL;
-	int i = *index_ptr;
+	int i = *index_ptr, j = 0;
 
 	while (*(s + i) != '\0')
 	{
@@ -30,8 +30,20 @@ char *_strchr(int *index_ptr, char *s, char *c)
 				!= *c && *(s + i + 1)
 					!= '\0')
 			{
-				location = s + i;
-				break;
+				j = i;
+				while (*(s + j) != '\0')
+				{
+					if (*(s + j) != *c)
+					{
+
+						location = s + i;
+						break;
+					}
+					j++;
+				}
+
+				if (location != NULL)
+					break;
 			}
 		}
 
@@ -81,6 +93,7 @@ char **strtoarr(char *str, char *delim)
 	int i = 0;
 	char *temp;
 	int nwords = strchrcount(str, delim) + 2;
+
 	char *dup = strdup(str);
 	char **strarr = malloc(sizeof(char *) * nwords);
 
@@ -96,6 +109,7 @@ char **strtoarr(char *str, char *delim)
 		i++;
 	}
 	*(strarr + i) = NULL;
+	free(dup);
 	return (strarr);
 }
 
@@ -108,7 +122,7 @@ int main(void)
 {
 	int i = 0;
 	char *delim = ",";
-	char *str = ",hello,,hi,bye,he";
+	char *str = ",hello,,hi,bye,he,,,";
 	char **strarr = strtoarr(str, delim);
 
 	printf("words found: \n");
@@ -117,6 +131,7 @@ int main(void)
 		if (*(strarr + i) != NULL)
 		{
 			printf("%s \n", *(strarr + i));
+			free(*(strarr + i));
 		}
 
 		else if (*(strarr + i) == NULL)
