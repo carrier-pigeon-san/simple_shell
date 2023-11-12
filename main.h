@@ -20,6 +20,12 @@ extern char **environ;
 #include <errno.h>
 
 ssize_t _getline(char **strptr);
-void *_expand(void *loc, unsigned int initial_size, unsigned int current_size);
+void *_expand(void *loc, unsigned int initial_size, unsigned int new_size);
+char *_strtok(char *str, const char *delim);
+char **make_list(char *strOG, char *breaker);
+char *_getenv(const char *varname);
+char *_strdup(const char *strOG);
+void parse_cmd(char *cmdstr, char *av_0);
+char *get_path(const char *filename);
 
 #endif /* MAIN_H */
