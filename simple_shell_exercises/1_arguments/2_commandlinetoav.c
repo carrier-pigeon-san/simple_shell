@@ -6,6 +6,7 @@
 /**
  * _strchr -  a function that locates a character
  * in a string
+ * @index_ptr: pointer to where to begin from on string
  * @s: pointer to start of string
  * @c: character to locate
  * Return: a pointer to the first occurrence of
