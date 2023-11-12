@@ -66,7 +66,6 @@ int strchrcount(char *str, char *c)
 	while (str_local != NULL)
 	{
 		str_local = _strchr(&index, str, c);
-		printf("index: %d\n", index);
 		i++;
 	}
 	return (i);
