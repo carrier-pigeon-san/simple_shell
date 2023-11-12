@@ -26,30 +26,25 @@ char *_strchr(int *index_ptr, char *s, char *c)
 	{
 		if (*(s + i) == *c)
 		{
-			if (i > 0 && *(s + i - 1)
-				!= *c && *(s + i + 1)
-					!= '\0')
+			if (i > 0)
 			{
 				j = i;
 				while (*(s + j) != '\0')
 				{
 					if (*(s + j) != *c)
 					{
-
-						location = s + i;
+						location = s + j;
 						break;
 					}
 					j++;
 				}
-
-				if (location != NULL)
-					break;
+				break;
 			}
 		}
 
 		i++;
 	}
-	*index_ptr = ++i;
+	*index_ptr = j;
 
 	return (location);
 }
@@ -71,6 +66,7 @@ int strchrcount(char *str, char *c)
 	while (str_local != NULL)
 	{
 		str_local = _strchr(&index, str, c);
+		printf("index: %d\n", index);
 		i++;
 	}
 	return (i);
@@ -122,7 +118,7 @@ int main(void)
 {
 	int i = 0;
 	char *delim = ",";
-	char *str = ",hello,,hi,bye,he,,,";
+	char *str = ",hello,,hi,bye,he,,,k,";
 	char **strarr = strtoarr(str, delim);
 
 	printf("words found: \n");
