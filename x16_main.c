@@ -4,7 +4,7 @@
  *
  * Return: 0 (Succes)
  */
-int main()
+int main(void)
 {
 	char *cmdLine;
 	ssize_t rd_cmd;
@@ -19,7 +19,7 @@ int main()
 		rd_cmd = _getline(&cmdLine);
 		if (rd_cmd == -1)
 		{
-			free (cmdLine);
+			free(cmdLinie);
 			exit(EXIT_FAILURE);
 			/*FLAG*/
 		}

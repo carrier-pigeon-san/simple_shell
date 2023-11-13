@@ -27,5 +27,6 @@ char *_getenv(const char *varname);
 char *_strdup(const char *strOG);
 void parse_cmd(char *cmdstr, char *av_0);
 char *get_path(const char *filename);
+char *cat_file_path(const char *filename, char *filepath);
 
 #endif /* MAIN_H */

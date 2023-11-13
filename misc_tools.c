@@ -7,7 +7,7 @@
  */
 char *_strdup(const char *strOG)
 {
-	char *dup;
+	char *dup = NULL;
 	int c, n;
 
 	if (strOG == NULL)
