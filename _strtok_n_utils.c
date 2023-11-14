@@ -14,7 +14,7 @@ char *_strtok(char *str, const char *delim)
 
 	if (str != NULL)
 		cache = str;
-	if (*cache == '\0')
+	if (cache == NULL || *cache == '\0')
 		return (NULL);
 	for (c = 0; cache[c] != '\0'; c++)
 	{

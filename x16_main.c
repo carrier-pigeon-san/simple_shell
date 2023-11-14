@@ -1,13 +1,17 @@
 #include "main.h"
 /**
  * main - entry point to UNIX command interpreter
+ * @ac: argument count
+ * @av: argument vector
  *
  * Return: 0 (Succes)
  */
-int main(void)
+int main(int ac, char **av)
 {
-	char *cmdLine;
+	char *cmdLine, *dupcmd;
 	ssize_t rd_cmd;
+
+	(void)ac;
 
 	cmdLine = malloc(sizeof(char) * BYTES_SIZE);
 	if (cmdLine == NULL)
@@ -15,17 +19,21 @@ int main(void)
 
 	while (1)
 	{
-		write(STDOUT_FILENO, "$ ", 2);
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
 		rd_cmd = _getline(&cmdLine);
 		if (rd_cmd == -1)
 		{
-			free(cmdLinie);
+			free(cmdLine);
 			exit(EXIT_FAILURE);
 			/*FLAG*/
 		}
-		if (rd_cmd > 0)
-			parse_cmd(cmdLine, *av);
-		printf("%s\n", cmdLine);
+		else if (rd_cmd > 0)
+		{
+			dupcmd = _strdup(cmdLine);
+			rm_nwln(dupcmd);
+			parse_cmd(dupcmd, av[0]);
+		}
 	}
 	free(cmdLine);
 	return (0);

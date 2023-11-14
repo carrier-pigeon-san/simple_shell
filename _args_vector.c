@@ -1,9 +1,10 @@
 #include "main.h"
 /**
- * get_args - builds an array of strings from tokenizing a string
+ * make_list - builds an array of strings from tokenizing a string
  * @strOG: original string
+ * @breaker: string of delimiter characters
  *
- * Returns: an array of tokens of the original string
+ * Return: an array of tokens of the original string
  */
 char **make_list(char *strOG, char *breaker)
 {

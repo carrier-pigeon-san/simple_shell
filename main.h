@@ -28,5 +28,6 @@ char *_strdup(const char *strOG);
 void parse_cmd(char *cmdstr, char *av_0);
 char *get_path(const char *filename);
 char *cat_file_path(const char *filename, char *filepath);
+void rm_nwln(char *str);
 
 #endif /* MAIN_H */

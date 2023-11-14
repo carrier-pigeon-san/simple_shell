@@ -55,5 +55,27 @@ char *get_path(const char *filename)
  */
 char *cat_file_path(const char *filename, char *pathname)
 {
+	int idx, count;
+	char *path_cp = _strdup(pathname);
 
+	for (idx = 0; path_cp[idx] != '\0'; idx++)
+		;
+
+	for (count = 0, idx++; filename[count] != '\0'; count++, idx++)
+	{
+		if (count == 0)
+			path_cp[idx - 1] = '/';
+		path_cp = _expand(path_cp, sizeof(char) * idx, sizeof(char) * (idx + 1));
+		if (path_cp == NULL)
+			return (NULL);
+		/*FLAG*/
+		path_cp[idx] = filename[count];
+	}
+	path_cp = _expand(path_cp, sizeof(char) * idx, sizeof(char) * (idx + 1));
+	if (path_cp == NULL)
+		return (NULL);
+	/* FLAG */
+
+	path_cp[idx] = '\0';
+	return (path_cp);
 }
