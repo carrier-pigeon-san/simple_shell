@@ -37,30 +37,28 @@ void parse_cmd(char *cmdstr, char *av_0)
 
 	(void)av_0;
 
-	if (!pathname)
+	if (pathname)
 	{
-		perror("command not found!");
-	}
-
-	proc = fork();
-	if (proc == 0)
-	{
-		if (execve(pathname, cmd_arr, environ) == -1)
-			perror("Error: ");
-		/* FLAG */
-		_exit(1);
-	}
-	else if (proc > 0)
-	{
-		exit_state = wait(&state);
-		if (exit_state == proc)
+		proc = fork();
+		if (proc == 0)
 		{
-			if (!WIFEXITED(state))
-				perror("wrongful termination");
+			if (execve(pathname, cmd_arr, environ) == -1)
+				perror("Error: ");
+			/* FLAG */
+			_exit(1);
+		}
+		else if (proc > 0)
+		{
+			exit_state = wait(&state);
+			if (exit_state == proc)
+			{
+				if (!WIFEXITED(state))
+					perror("wrongful termination");
+			}
+			else
+				perror("Something went wrong waiting");
 		}
 		else
-			perror("Something went wrong waiting");
+			perror("Fork failure");
 	}
-	else
-		perror("Fork failure");
 }
