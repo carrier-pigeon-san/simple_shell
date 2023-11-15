@@ -67,7 +67,7 @@ char *_strstrp(const char *strOG)
 	if (strOG == NULL)
 		return (NULL);
 
-	while(strOG[m] != '\0')
+	while (strOG[m] != '\0')
 	{
 		if (strOG[m] != 32 || (strOG[m] == 32 && space_found))
 		{
@@ -77,7 +77,7 @@ char *_strstrp(const char *strOG)
 			n++;
 		}
 		m++;
-	}	
+	}
 
 	dup = malloc(sizeof(char) * (n + 1));
 	if (dup == NULL)

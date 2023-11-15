@@ -21,10 +21,10 @@ int main(int ac, char **av)
 	}
 
 	while (1)
-	{		
+	{
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
-				
+
 		rd_cmd = _getline(&cmdLine);
 		if (rd_cmd == -1)
 		{
