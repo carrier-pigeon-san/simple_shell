@@ -43,9 +43,9 @@ void parse_cmd(char *cmdstr, char *av_0)
 		if (proc == 0)
 		{
 			if (execve(pathname, cmd_arr, environ) == -1)
-				perror("Error: ");
+				perror("Error");
 			/* FLAG */
-			_exit(1);
+			_exit(255);
 		}
 		else if (proc > 0)
 		{
@@ -53,12 +53,15 @@ void parse_cmd(char *cmdstr, char *av_0)
 			if (exit_state == proc)
 			{
 				if (!WIFEXITED(state))
-					perror("wrongful termination");
+					perror("Proc-term error");
 			}
 			else
-				perror("Something went wrong waiting");
+				perror("Wait error");
 		}
 		else
-			perror("Fork failure");
+			perror("Fork error");
+	}
+	else
+	{
 	}
 }

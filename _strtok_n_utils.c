@@ -38,7 +38,10 @@ char *_strtok(char *str, const char *delim)
 	}
 	temp = malloc(sizeof(char) * (c + 1));
 	if (temp == NULL)
+	{
+		perror("Error");
 		return (NULL);
+	}
 	/* FLAG */
 	for (i = 0; i < c; i++)
 		if (cache[i])

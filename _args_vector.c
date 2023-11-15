@@ -15,7 +15,10 @@ char **make_list(char *strOG, char *breaker)
 
 	vector = malloc(sizeof(char *) * len);
 	if (vector == NULL)
+	{
+		perror("Error");
 		return (NULL);
+	}
 
 	element = _strtok(strOG, breaker);
 
@@ -23,7 +26,10 @@ char **make_list(char *strOG, char *breaker)
 	{
 		vector = _expand(vector, sizeof(char *) * len, sizeof(char *) * (len + 1));
 		if (vector == NULL)
+		{
+			perror("Error");
 			return (NULL);
+		}
 		vector[c] = element;
 		element = _strtok(NULL, breaker);
 		len++;

@@ -24,7 +24,7 @@ ssize_t _getline(char **strptr)
 			if (bytes_read == 0)
 			{
 				free(*strptr);
-				exit(98);
+				exit(0);
 			}
 			(*strptr)[bytes_read] = '\0';
 			return (rd_char);

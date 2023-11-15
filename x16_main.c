@@ -15,7 +15,10 @@ int main(int ac, char **av)
 
 	cmdLine = malloc(sizeof(char) * BYTES_SIZE);
 	if (cmdLine == NULL)
+	{
+		perror("Error");
 		return (-1);
+	}
 
 	while (1)
 	{
@@ -24,6 +27,7 @@ int main(int ac, char **av)
 		rd_cmd = _getline(&cmdLine);
 		if (rd_cmd == -1)
 		{
+			perror("Error");
 			free(cmdLine);
 			exit(EXIT_FAILURE);
 			/*FLAG*/
