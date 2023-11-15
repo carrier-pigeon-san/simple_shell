@@ -63,6 +63,6 @@ void parse_cmd(char *cmdstr, char *av_0)
 	}
 	else
 	{
-		perror("./shell");
+		perror(av_0);
 	}
 }
