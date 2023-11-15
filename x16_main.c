@@ -36,6 +36,8 @@ int main(int ac, char **av)
 		{
 			dupcmd = _strdup(cmdLine);
 			rm_nwln(dupcmd);
+			if (*dupcmd == '\0')
+				continue;
 			parse_cmd(dupcmd, av[0]);
 		}
 	}
