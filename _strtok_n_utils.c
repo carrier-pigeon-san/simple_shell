@@ -3,7 +3,7 @@
  * _strtok - breaks a string into a sequence of tokens
  * @str: string to be tokenized
  * @delim: string containing delimeter characters
- *
+ * Note - FLAG at line 45
  * Return: pointer to next token
  */
 char *_strtok(char *str, const char *delim)
@@ -42,7 +42,6 @@ char *_strtok(char *str, const char *delim)
 		perror("Error");
 		return (NULL);
 	}
-	/* FLAG */
 	for (i = 0; i < c; i++)
 		if (cache[i])
 			temp[i] = cache[i];
