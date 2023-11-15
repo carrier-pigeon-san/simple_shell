@@ -44,7 +44,7 @@ ssize_t _getline(char **strptr)
 				free(*strptr);
 				return (-1);
 			}
-			free(*strptr);
+			/*free(*strptr);*/
 			*strptr = new_buffer;
 			len += BYTES_SIZE;
 		}
