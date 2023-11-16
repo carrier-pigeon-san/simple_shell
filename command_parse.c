@@ -9,10 +9,12 @@ char *parse_token(char *token, char **cmd_arr, char *cmdstr, char *cmdLine)
 {
 	struct stat st;
 	char *pathname, *dir;
-	int i = 0;
+	int i = 0, exit_s = 0;
 
 	if (_strcmp(cmd_arr[0], "exit") == 0)
 	{
+		if (cmd_arr[1] != NULL)
+			exit_s = _atoi(cmd_arr[1]);
 		while (cmd_arr[i] != NULL)
 			free(cmd_arr[i++]);
 		free(cmd_arr);
@@ -20,7 +22,7 @@ char *parse_token(char *token, char **cmd_arr, char *cmdstr, char *cmdLine)
 		free(cmdLine);
 		fflush(stdin);
 		fflush(stdout);
-		_exit(0);
+		_exit(exit_s);
 	}
 
 	if (stat(token, &st) == 0)
