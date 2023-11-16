@@ -10,6 +10,11 @@ char *parse_token(char *token)
 	struct stat st;
 	char *pathname, *dir;
 
+	if (_strcmp(token, "exit") == 0)
+	{
+		kill(getpid(), SIGINT);
+	}
+
 	if (stat(token, &st) == 0)
 		return (pathname = _strdup(token));
 	dir = get_path(token);
@@ -65,7 +70,7 @@ void parse_cmd(char *cmdstr, char *av_0)
 	}
 	else
 	{
-		perror("./shell");
+		perror(av_0);
 	}
 	for (i = 0; cmd_arr[i] != NULL; i++)
 		free(cmd_arr[i]);
