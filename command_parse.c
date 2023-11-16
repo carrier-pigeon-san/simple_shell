@@ -12,7 +12,7 @@ char *parse_token(char *token)
 
 	if (_strcmp(token, "exit") == 0)
 	{
-		kill(getpid(), SIGINT);
+		exit(0);
 	}
 
 	if (stat(token, &st) == 0)
