@@ -11,7 +11,7 @@ char *parse_token(char *token)
 	char *pathname, *dir;
 
 	if (stat(token, &st) == 0)
-		return (token);
+		return (pathname = _strdup(token));
 	dir = get_path(token);
 	if (dir == NULL)
 		return (NULL);
@@ -19,6 +19,7 @@ char *parse_token(char *token)
 	if (pathname == NULL)
 		return (NULL);
 
+	free(dir);
 	return (pathname);
 }
 /**
@@ -30,7 +31,7 @@ char *parse_token(char *token)
  */
 void parse_cmd(char *cmdstr, char *av_0)
 {
-	int state;
+	int state, i;
 	char **cmd_arr = make_list(cmdstr, " ");
 	char *pathname = parse_token(cmd_arr[0]);
 	pid_t proc, exit_state;
@@ -60,8 +61,14 @@ void parse_cmd(char *cmdstr, char *av_0)
 		}
 		else
 			perror("Fork error");
+		free(pathname);
 	}
 	else
 	{
+		perror("./shell");
 	}
+	for (i = 0; cmd_arr[i] != NULL; i++)
+		free(cmd_arr[i]);
+	free(cmd_arr);
+	free(cmdstr);
 }

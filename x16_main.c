@@ -27,9 +27,8 @@ int main(int ac, char **av)
 		rd_cmd = _getline(&cmdLine);
 		if (rd_cmd == -1)
 		{
-			perror("Error");
 			free(cmdLine);
-			exit(EXIT_FAILURE);
+			return (-1);
 			/*FLAG*/
 		}
 		else if (rd_cmd > 0)
@@ -41,6 +40,7 @@ int main(int ac, char **av)
 			parse_cmd(dupcmd, av[0]);
 		}
 	}
+	free(dupcmd);
 	free(cmdLine);
 	return (0);
 }
