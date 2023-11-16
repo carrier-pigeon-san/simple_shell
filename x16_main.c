@@ -24,6 +24,7 @@ int main(int ac, char **av)
 	{
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
+
 		rd_cmd = _getline(&cmdLine);
 		if (rd_cmd == -1)
 		{
@@ -33,10 +34,13 @@ int main(int ac, char **av)
 		}
 		else if (rd_cmd > 0)
 		{
-			dupcmd = _strdup(cmdLine);
+			dupcmd = _strstrp(cmdLine);
 			rm_nwln(dupcmd);
 			if (*dupcmd == '\0')
+			{
+				free(dupcmd);
 				continue;
+			}
 			parse_cmd(dupcmd, av[0]);
 		}
 	}

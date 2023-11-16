@@ -25,6 +25,7 @@ char *_strtok(char *str, const char *delim);
 char **make_list(char *strOG, char *breaker);
 char *_getenv(const char *varname);
 char *_strdup(const char *strOG);
+char *_strstrp(const char *strOG);
 void parse_cmd(char *cmdstr, char *av_0);
 char *get_path(const char *filename);
 char *cat_file_path(const char *filename, char *filepath);
