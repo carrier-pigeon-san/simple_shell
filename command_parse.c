@@ -18,7 +18,9 @@ char *parse_token(char *token, char **cmd_arr, char *cmdstr, char *cmdLine)
 		free(cmd_arr);
 		free(cmdstr);
 		free(cmdLine);
-		exit(0);
+		fflush(stdin);
+		fflush(stdout);
+		_exit(0);
 	}
 
 	if (stat(token, &st) == 0)
