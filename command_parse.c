@@ -18,7 +18,10 @@ char *parse_token(char *token, char **cmd_arr, char *cmdstr, char *cmdLine)
 		free(cmd_arr);
 		free(cmdstr);
 		free(cmdLine);
-		exit(0);
+		fflush(stdin);
+		fflush(stdout);
+		signal(SIGINT, SIG_DFL);
+		kill(getpid(), SIGINT);
 	}
 
 	if (stat(token, &st) == 0)
