@@ -5,13 +5,19 @@
  *
  * Return: pathname or NULL if fails
  */
-char *parse_token(char *token)
+char *parse_token(char *token, char **cmd_arr, char *cmdstr, char *cmdLine)
 {
 	struct stat st;
 	char *pathname, *dir;
+	int i = 0;
 
-	if (_strcmp(token, "exit") == 0)
+	if (_strcmp(cmd_arr[0], "exit") == 0)
 	{
+		while (cmd_arr[i] != NULL)
+			free(cmd_arr[i++]);
+		free(cmd_arr);
+		free(cmdstr);
+		free(cmdLine);
 		exit(0);
 	}
 
@@ -34,11 +40,11 @@ char *parse_token(char *token)
  *
  * Return: void
  */
-void parse_cmd(char *cmdstr, char *av_0)
+void parse_cmd(char *cmdstr, char *av_0, char *cmdLine)
 {
 	int state, i;
 	char **cmd_arr = make_list(cmdstr, " ");
-	char *pathname = parse_token(cmd_arr[0]);
+	char *pathname = parse_token(cmd_arr[0], cmd_arr, cmdstr, cmdLine);
 	pid_t proc, exit_state;
 
 	(void)av_0;

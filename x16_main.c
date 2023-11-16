@@ -41,7 +41,7 @@ int main(int ac, char **av)
 				free(dupcmd);
 				continue;
 			}
-			parse_cmd(dupcmd, av[0]);
+			parse_cmd(dupcmd, av[0], cmdLine);
 		}
 	}
 	free(dupcmd);
