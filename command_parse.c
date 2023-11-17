@@ -42,7 +42,7 @@ char * _print_env()
 
 	if (!shlvl_check())
 		printf("SHLVL=0\n");
-	while (environ[i] != NULL && environ[i][0] != '_')
+	while (environ[i] != NULL)
 		printf("%s\n", environ[i++]);
 	
 	return "Printed";
