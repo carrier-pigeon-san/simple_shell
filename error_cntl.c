@@ -15,7 +15,6 @@ void cat_delim(char str[], size_t *e)
 }
 /**
  * num2str - converts integer to string;
- * @str: buffer
  * @cmdi: given integer
  * @c: character count
  *
@@ -49,6 +48,14 @@ char *num2str(int cmdi, size_t *c)
 
 	return (str);
 }
+/**
+ * strscat - concatenates two strings of a known size
+ * @dest: first string
+ * @src: second string
+ * @s: combined length of both strings
+ *
+ * Return: pointer to combined string
+ */
 char *strscat(char *dest, char *src, size_t s)
 {
 	int c, i;
@@ -99,7 +106,7 @@ void write_err(char *prog_nm, char *commd, int commd_idx)
 	size += 10;
 	err_msg = strscat(err_msg, msg, size);
 
-	write (STDERR_FILENO, err_msg, _strlen(err_msg));
+	write(STDERR_FILENO, err_msg, _strlen(err_msg));
 	free(numstr);
 	free(err_msg);
 }

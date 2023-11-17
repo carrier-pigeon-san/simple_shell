@@ -11,6 +11,7 @@ int main(int ac, char **av)
 	char *cmdLine, *dupcmd;
 	ssize_t rd_cmd;
 	int cmd_count = 1;
+	int child_exit = 0;
 
 	(void)ac;
 
@@ -20,7 +21,6 @@ int main(int ac, char **av)
 		perror("Error");
 		return (-1);
 	}
-
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -42,7 +42,7 @@ int main(int ac, char **av)
 				free(dupcmd);
 				continue;
 			}
-			parse_cmd(dupcmd, av[0], &cmd_count);
+			parse_cmd(dupcmd, av[0], cmdLine, &cmd_count, &child_exit);
 		}
 	}
 	free(dupcmd);
