@@ -10,6 +10,7 @@ int main(int ac, char **av)
 {
 	char *cmdLine, *dupcmd;
 	ssize_t rd_cmd;
+	int child_exit;
 
 	(void)ac;
 
@@ -41,7 +42,7 @@ int main(int ac, char **av)
 				free(dupcmd);
 				continue;
 			}
-			parse_cmd(dupcmd, av[0], cmdLine);
+			parse_cmd(dupcmd, av[0], cmdLine, &child_exit);
 		}
 	}
 	free(dupcmd);

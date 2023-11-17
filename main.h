@@ -28,7 +28,7 @@ char *_strdup(const char *strOG);
 char *_strstrp(const char *strOG);
 int _strcmp(char *s1, char *s2);
 int _atoi(char *s);
-void parse_cmd(char *cmdstr, char *av_0, char *cmdLine);
+void parse_cmd(char *cmdstr, char *av_0, char *cmdLine, int *child_exitp);
 char *get_path(const char *filename);
 char *cat_file_path(const char *filename, char *filepath);
 void rm_nwln(char *str);
