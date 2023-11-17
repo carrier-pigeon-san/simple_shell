@@ -95,3 +95,19 @@ char *_strstrp(const char *strOG)
 	dup[c] = '\0';
 	return (dup);
 }
+/**
+ * _strlen - counts the number of characters in a string (null byte exluded)
+ * @str: given string
+ *
+ * Return: length of string
+ */
+size_t _strlen(const char *str)
+{
+	size_t c;
+
+	for (c = 0; str[c] != '\0'; c++)
+		;
+	return (c);
+}
+
+

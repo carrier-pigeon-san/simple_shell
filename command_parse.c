@@ -29,7 +29,7 @@ char *parse_token(char *token)
  *
  * Return: void
  */
-void parse_cmd(char *cmdstr, char *av_0)
+void parse_cmd(char *cmdstr, char *av_0, int *cmd_count)
 {
 	int state, i;
 	char **cmd_arr = make_list(cmdstr, " ");
@@ -65,8 +65,10 @@ void parse_cmd(char *cmdstr, char *av_0)
 	}
 	else
 	{
-		perror("./shell");
+		int num = *cmd_count;
+		write_err(av_0, cmd_arr[0], num);
 	}
+	(*cmd_count)++;
 	for (i = 0; cmd_arr[i] != NULL; i++)
 		free(cmd_arr[i]);
 	free(cmd_arr);

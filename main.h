@@ -26,9 +26,11 @@ char **make_list(char *strOG, char *breaker);
 char *_getenv(const char *varname);
 char *_strdup(const char *strOG);
 char *_strstrp(const char *strOG);
-void parse_cmd(char *cmdstr, char *av_0);
+void parse_cmd(char *cmdstr, char *av_0, int *cmd_count);
 char *get_path(const char *filename);
 char *cat_file_path(const char *filename, char *filepath);
 void rm_nwln(char *str);
+size_t _strlen(const char *str);
+void write_err(char *prog_nm, char *commd, int commd_idx);
 
 #endif /* MAIN_H */
