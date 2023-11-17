@@ -35,6 +35,18 @@ int exit_param_handler(char *av_0, char *exit_param)
 		fprintf(stderr, "%s: 1: exit: Illegal number: %d\n", av_0, temp);
 	return (2);
 }
+
+char * _print_env()
+{
+	int i = 0;
+
+	if (!shlvl_check())
+		printf("SHLVL=0\n");
+	while (environ[i] != NULL && environ[i][0] != '_')
+		printf("%s\n", environ[i++]);
+	
+	return "Printed";
+}
 /**
  * parse_token - returns a pathname to a given executable file if it exists
  * @token: first token of command read from stdin
@@ -68,6 +80,8 @@ char *parse_token(char *token, char **cmd_arr,
 		fflush(stdout);
 		_exit(exit_s);
 	}
+	else if (_strcmp(cmd_arr[0], "env") == 0)
+		return (_print_env());
 
 	if (stat(token, &st) == 0)
 		return (pathname = _strdup(token));
@@ -99,7 +113,7 @@ void parse_cmd(char *cmdstr, char *av_0, char *cmdLine, int *child_exitp)
 
 	(void)av_0;
 
-	if (pathname)
+	if (pathname && _strcmp(pathname, "Printed") != 0)
 	{
 		proc = fork();
 		if (proc == 0)
@@ -124,7 +138,7 @@ void parse_cmd(char *cmdstr, char *av_0, char *cmdLine, int *child_exitp)
 			perror("Fork error");
 		free(pathname);
 	}
-	else
+	else if (pathname == NULL)
 		perror(av_0);
 	for (i = 0; cmd_arr[i] != NULL; i++)
 		free(cmd_arr[i]);

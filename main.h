@@ -32,5 +32,6 @@ void parse_cmd(char *cmdstr, char *av_0, char *cmdLine, int *child_exitp);
 char *get_path(const char *filename);
 char *cat_file_path(const char *filename, char *filepath);
 void rm_nwln(char *str);
+int shlvl_check();
 
 #endif /* MAIN_H */
