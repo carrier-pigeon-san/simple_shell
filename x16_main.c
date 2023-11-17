@@ -10,7 +10,7 @@ int main(int ac, char **av)
 {
 	char *cmdLine, *dupcmd;
 	ssize_t rd_cmd;
-	int child_exit;
+	int child_exit = 0;
 
 	(void)ac;
 
