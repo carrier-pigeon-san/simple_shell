@@ -13,6 +13,28 @@ void check_exit(int *child_exitp, int *statep)
 	else
 		*child_exitp = 0;
 }
+
+/**
+ * exit_param_handler - handles an exit parameter
+ * @av_0: program name
+ * @exit_param: exit param provided
+ * Return: exit status
+*/
+
+int exit_param_handler(char *av_0, char *exit_param)
+{
+	int temp = _atoi(exit_param);
+
+	if (temp > 0)
+		return (temp);
+	else if (temp == 0 && exit_param[0] == 48)
+		return (temp);
+	else if (temp == 0 && exit_param[0] != 48)
+		fprintf(stderr, "%s: 1: exit: Illegal number: %s\n", av_0, exit_param);
+	else
+		fprintf(stderr, "%s: 1: exit: Illegal number: %d\n", av_0, temp);
+	return (2);
+}
 /**
  * parse_token - returns a pathname to a given executable file if it exists
  * @token: first token of command read from stdin
@@ -20,10 +42,12 @@ void check_exit(int *child_exitp, int *statep)
  * @cmdstr: command string
  * @cmdLine: command line
  * @child_exitp: pointer to child exit status
+ * @av_0: argument name
  * Return: pathname or NULL if fails
  */
 char *parse_token(char *token, char **cmd_arr,
-					char *cmdstr, char *cmdLine, int *child_exitp)
+					char *cmdstr, char *cmdLine, int *child_exitp,
+						char *av_0)
 {
 	struct stat st;
 	char *pathname, *dir;
@@ -32,7 +56,7 @@ char *parse_token(char *token, char **cmd_arr,
 	if (_strcmp(cmd_arr[0], "exit") == 0)
 	{
 		if (cmd_arr[1] != NULL)
-			exit_s = _atoi(cmd_arr[1]);
+			exit_s = exit_param_handler(av_0, cmd_arr[1]);
 		else
 			exit_s = *child_exitp;
 		while (cmd_arr[i] != NULL)
@@ -70,7 +94,7 @@ void parse_cmd(char *cmdstr, char *av_0, char *cmdLine, int *child_exitp)
 	int state, i;
 	char **cmd_arr = make_list(cmdstr, " ");
 	char *pathname = parse_token(cmd_arr[0], cmd_arr, cmdstr,
-									cmdLine, child_exitp);
+									cmdLine, child_exitp, av_0);
 	pid_t proc, exit_state;
 
 	(void)av_0;
